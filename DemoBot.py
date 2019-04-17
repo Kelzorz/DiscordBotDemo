@@ -17,9 +17,6 @@ async def on_message(message):
         await message.channel.send(msg)
         return
 
-    if message.content.startswith("!pester"):
-        await pesterCommand(message)
-
     if message.content.startswith("!messagedump"):
         await messagedumpCommand(message)
 
@@ -39,18 +36,6 @@ async def on_ready():
 @client.event
 async def on_error(event, *args, **kwargs):
     return
-
-async def pesterCommand(message):
-    try:
-        pesterCmd = message.content.split(" ")
-        message.channel.id = pesterCmd[2]
-        if len(pesterCmd) == 3:
-            pesterCmd.append("")
-        msg = "<@" + pesterCmd[1] + "> " + pesterCmd[3]
-        await message.channel.send(msg)
-    except Exception as whoops:
-        instruction = "Syntax: !pester <user id> <channel id> (optional)<message>"
-        await message.channel.send(instruction)
 
 async def messagedumpCommand(message):
     await message.channel.send(message)
